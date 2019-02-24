@@ -4,8 +4,11 @@ import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { Query } from "react-apollo";
-import fetch from 'node-fetch';
-import gql from 'graphql-tag';
+import fetch from "node-fetch";
+import gql from "graphql-tag";
+
+import GlobalStyle from "../components/global-style";
+import AppHeader from "../components/header";
 
 const cache = new InMemoryCache();
 
@@ -31,12 +34,14 @@ const EXPENSES_LIST = gql`
 
 const Index = () => (
   <ApolloProvider client={client}>
+    <GlobalStyle />
+    <AppHeader />
     <Query query={EXPENSES_LIST}>
       {({ data, loading }) => {
         if (loading || !data) {
           return <div>Loading ...</div>;
         }
-        console.log(expenses);
+        console.log(data);
         return <p>hello</p>;
       }}
     </Query>
