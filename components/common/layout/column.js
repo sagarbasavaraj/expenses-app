@@ -26,7 +26,7 @@ const Column = styled.div`
   flex: 0 0 auto;
   padding-right: var(--half-gutter-width, 0.5rem);
   padding-left: var(--half-gutter-width, 0.5rem);
-
+    
   ${({ xs, xsOffset }) => (xs ? getStyle(xs, xsOffset) : "width: 100%")};
 
   @media only screen and (min-width: 48em) {

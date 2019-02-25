@@ -1,14 +1,15 @@
 import React from "react";
+import { Grommet } from "grommet";
+import { grommet } from "grommet/themes";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { Query } from "react-apollo";
 import fetch from "node-fetch";
-import gql from "graphql-tag";
 
-import GlobalStyle from "../components/global-style";
+import GlobalStyle from "../components/common/global-style";
 import AppHeader from "../components/header";
+import AppContent from "../components/app-content";
 
 const cache = new InMemoryCache();
 
@@ -24,28 +25,14 @@ const client = new ApolloClient({
   cache
 });
 
-const EXPENSES_LIST = gql`
-  {
-    expenses {
-      expenseType
-    }
-  }
-`;
-
 const Index = () => (
-  <ApolloProvider client={client}>
-    <GlobalStyle />
-    <AppHeader />
-    <Query query={EXPENSES_LIST}>
-      {({ data, loading }) => {
-        if (loading || !data) {
-          return <div>Loading ...</div>;
-        }
-        console.log(data);
-        return <p>hello</p>;
-      }}
-    </Query>
-  </ApolloProvider>
+  <Grommet full theme={grommet}>
+    <ApolloProvider client={client}>
+      <GlobalStyle />
+      <AppHeader />
+      <AppContent />
+    </ApolloProvider>
+  </Grommet>
 );
 
 export default Index;
