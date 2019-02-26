@@ -4,11 +4,16 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 
 import { Container } from "./common/layout";
+import ExpenseList from "./expense-list";
 
 const EXPENSES_LIST = gql`
   {
     expenses {
-      expenseType
+      expenseType,
+      date,
+      amount,
+      paidBy,
+      description
     }
   }
 `;
@@ -26,7 +31,7 @@ const AppContent = () => (
       console.log(data);
       return (
         <Content>
-          <p>hello</p>
+          <ExpenseList expenses={data.expenses} />
         </Content>
       );
     }}

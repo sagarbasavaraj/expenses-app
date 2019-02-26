@@ -21,11 +21,7 @@ const getStyle = (size, offset) => {
 };
 
 const Column = styled.div`
-  --gutter-width: 1rem;
-  --half-gutter-width: calc((var(--gutter-width) * 0.5));
   flex: 0 0 auto;
-  padding-right: var(--half-gutter-width, 0.5rem);
-  padding-left: var(--half-gutter-width, 0.5rem);
     
   ${({ xs, xsOffset }) => (xs ? getStyle(xs, xsOffset) : "width: 100%")};
 
