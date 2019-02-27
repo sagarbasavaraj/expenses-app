@@ -9,17 +9,17 @@ import ExpenseList from "./expense-list";
 const EXPENSES_LIST = gql`
   {
     expenses {
-      expenseType,
-      date,
-      amount,
-      paidBy,
+      expenseType
+      date
+      amount
+      paidBy
       description
     }
   }
 `;
 
 const Content = styled(Container)`
-  padding-top: 80px;
+  padding: 70px 0;
 `;
 
 const AppContent = () => (

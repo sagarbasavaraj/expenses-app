@@ -10,6 +10,7 @@ const Header = styled.header`
   height: 60px;
   background: #4ca387;
   padding: 10px 30px;
+  z-index: 3;
 `;
 
 const Content = styled.div`
@@ -32,12 +33,20 @@ const AppHeader = () => (
       <Row>
         <Column xs={3}>
           <LeftContent>
-            <Heading color="#fff" level="3">Expenses</Heading>
+            <Heading color="#fff" level="3">
+              Expenses
+            </Heading>
           </LeftContent>
         </Column>
         <Column xs={9}>
           <RightContent>
-            <Button icon={<Add />} label="Add" onClick={() => {}} color="#ffffff" primary  />
+            <Button
+              icon={<Add />}
+              label="Add"
+              onClick={() => {}}
+              color="#ffffff"
+              primary
+            />
           </RightContent>
         </Column>
       </Row>

@@ -22,18 +22,18 @@ const getStyle = (size, offset) => {
 
 const Column = styled.div`
   flex: 0 0 auto;
-    
+
   ${({ xs, xsOffset }) => (xs ? getStyle(xs, xsOffset) : "width: 100%")};
 
-  @media only screen and (min-width: 48em) {
+  @media only screen and (min-width: 600px) {
     ${({ sm, smOffset }) => sm && getStyle(sm, smOffset)};
   }
 
-  @media only screen and (min-width: 64em) {
+  @media only screen and (min-width: 768px) {
     ${({ md, mdOffset }) => md && getStyle(md, mdOffset)};
   }
 
-  @media only screen and (min-width: 75em) {
+  @media only screen and (min-width: 992px) {
     ${({ lg, lgOffSet }) => lg && getStyle(lg, lgOffSet)};
   }
 `;
