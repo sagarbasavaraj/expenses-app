@@ -70,7 +70,7 @@ const ItemFooterButton = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-const deleteHandler = ({target}) => {
+const deleteHandler = ({ target }) => {
   console.log(target);
 };
 
@@ -81,19 +81,19 @@ const ExpenseList = ({ expenses }) => {
         return (
           <ExpenseItem key={expense.id}>
             <Data>
-              <Text size="large" truncate>
+              <Text size="xlarge" truncate>
                 {expense.expenseType}
               </Text>
-              <Text size="medium">
+              <Text size="large">
                 {Number(expense.amount).toLocaleString()}
               </Text>
-              <Text size="small" truncate>
+              <Text size="medium" truncate>
                 {expense.description}
               </Text>
-              <Text size="small">
+              <Text size="medium">
                 {moment(+expense.date).format("MMM DD YYYY")}
               </Text>
-              <Text size="small">{`Paid by: ${expense.paidBy}`}</Text>
+              <Text size="large">{`Paid by: ${expense.paidBy}`}</Text>
             </Data>
             <ItemFooterButton>
               <Box align="start">

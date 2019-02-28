@@ -9,6 +9,7 @@ import ExpenseList from "./expense-list";
 const EXPENSES_LIST = gql`
   {
     expenses {
+      id
       expenseType
       date
       amount
@@ -28,7 +29,7 @@ const AppContent = () => (
       if (loading || !data) {
         return <div>Loading ...</div>;
       }
-      console.log(data);
+
       return (
         <Content>
           <ExpenseList expenses={data.expenses} />
