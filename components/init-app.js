@@ -4,7 +4,6 @@ import { Grommet } from "grommet";
 import { grommet } from "grommet/themes";
 
 import GlobalStyle from "../components/common/global-style";
-import AppHeader from "../components/header";
 import AppContent from "../components/app-content";
 import InitConfig from "../components/init-config";
 
@@ -27,7 +26,6 @@ class InitApp extends PureComponent {
       <Grommet full theme={grommet}>
         <ApolloProvider client={this.state.client}>
           <GlobalStyle />
-          <AppHeader />
           <AppContent />
         </ApolloProvider>
       </Grommet>

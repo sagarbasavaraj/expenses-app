@@ -7,7 +7,6 @@ import { Row, Column, Container } from "../components/common/layout";
 const Header = styled.header`
   position: fixed;
   width: 100%;
-  height: 60px;
   background: #4ca387;
   padding: 10px 30px;
   z-index: 3;
@@ -40,13 +39,6 @@ const AppHeader = () => (
         </Column>
         <Column xs={9}>
           <RightContent>
-            <Button
-              icon={<Add />}
-              label="Add"
-              onClick={() => {}}
-              color="#ffffff"
-              primary
-            />
           </RightContent>
         </Column>
       </Row>

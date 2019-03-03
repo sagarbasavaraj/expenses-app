@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Query, compose, graphql } from "react-apollo";
-import gql from "graphql-tag";
 import styled from "styled-components";
 
+import AppHeader from "./header";
+import AppFooter from "./footer";
 import { Container } from "./common/layout";
 import ExpenseList from "./expense-list";
+import Expense from "./expense";
+
 import { EXPENSES_LIST, REMOVE_EXPENSE } from "./expense.queries";
 
 const Content = styled(Container)`
@@ -46,23 +49,30 @@ class AppContent extends Component {
 
   render() {
     return (
-      <Query query={EXPENSES_LIST}>
-        {({ data, loading }) => {
-          if (loading || !data) {
-            return <div>Loading ...</div>;
+      <React.Fragment>
+        <AppHeader />
+        <Query query={EXPENSES_LIST}>
+          {({ data, loading }) => {
+            if (loading || !data) {
+              return <div>Loading ...</div>;
+            }
+            return (
+              <Content>
+                <ExpenseList
+                  expenses={data.expenses}
+                  deleteExpenseHandler={this.deleteExpense}
+                  editExpenseHandler={this.editExpense}
+                />
+              </Content>
+            );
+          }}
+        </Query>
+        <AppFooter>
+          {(showExpenseForm, closeForm) =>
+            showExpenseForm && <Expense closeForm={closeForm} />
           }
-
-          return (
-            <Content>
-              <ExpenseList
-                expenses={data.expenses}
-                deleteExpenseHandler={this.deleteExpense}
-                editExpenseHandler={this.editExpense}
-              />
-            </Content>
-          );
-        }}
-      </Query>
+        </AppFooter>
+      </React.Fragment>
     );
   }
 }
@@ -73,7 +83,10 @@ export default compose(
     options: {
       update: (proxy, { data: { removeExpense } }) => {
         let data = proxy.readQuery({ query: EXPENSES_LIST });
-        data = {...data, expenses: data.expenses.filter(item => item.id !== removeExpense.id)}
+        data = {
+          ...data,
+          expenses: data.expenses.filter(item => item.id !== removeExpense.id)
+        };
         proxy.writeQuery({ query: EXPENSES_LIST, data });
       }
     }

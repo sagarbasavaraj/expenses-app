@@ -27,10 +27,6 @@ const ExpenseListContainer = styled.section`
   @media only screen and (min-width: 992px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-
-  @media only screen and (min-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
 `;
 
 const ExpenseItem = styled.div`
@@ -93,7 +89,7 @@ const ExpenseList = ({
               <Text size="medium">
                 {moment(+expense.date).format("MMM DD YYYY")}
               </Text>
-              <Text size="large">{`Paid by: ${expense.paidBy}`}</Text>
+              <Text size="small">{`Paid by: ${expense.paidBy}`}</Text>
             </Data>
             <ItemFooterButton>
               <Box align="start">
