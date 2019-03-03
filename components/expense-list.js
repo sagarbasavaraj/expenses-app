@@ -70,11 +70,11 @@ const ItemFooterButton = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-const deleteHandler = ({ target }) => {
-  console.log(target);
-};
-
-const ExpenseList = ({ expenses }) => {
+const ExpenseList = ({
+  expenses,
+  deleteExpenseHandler,
+  editExpenseHandler
+}) => {
   return (
     <ExpenseListContainer>
       {map(expenses, expense => {
@@ -99,19 +99,20 @@ const ExpenseList = ({ expenses }) => {
               <Box align="start">
                 <Box round="full" overflow="hidden">
                   <Button
+                    data-id={expense.id}
                     icon={<Edit color="#097bed" />}
                     hoverIndicator
-                    onClick={deleteHandler}
+                    onClick={editExpenseHandler}
                   />
                 </Box>
               </Box>
               <Box align="end">
                 <Box round="full" overflow="hidden">
                   <Button
-                    color="red"
+                    data-id={expense.id}
                     icon={<Trash color="#e50615" />}
                     hoverIndicator
-                    onClick={() => {}}
+                    onClick={deleteExpenseHandler}
                   />
                 </Box>
               </Box>
