@@ -1,5 +1,5 @@
 const {GraphQLObjectType, GraphQLNonNull,
-  GraphQLID, GraphQLString, GraphQLFloat} = require("graphql");
+  GraphQLID, GraphQLString, GraphQLFloat, GraphQLInt} = require("graphql");
 
 // User Type
 exports.expenseType = new GraphQLObjectType({
@@ -21,7 +21,7 @@ exports.expenseType = new GraphQLObjectType({
       type: GraphQLString
     },
     date: {
-      type: GraphQLString
+      type: GraphQLFloat
     }
   })
 });

@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLList } = require("graphql");
+const { GraphQLObjectType, GraphQLList, GraphQLNonNull, GraphQLID } = require("graphql");
 
 const ExpenseModel = require("../../models/expense");
 const expenseType = require("../types/expense").expenseType;
@@ -16,6 +16,21 @@ exports.queryType = new GraphQLObjectType({
             throw new Error("Error");
           }
           return expenses;
+        }
+      },
+      expense: {
+        type: expenseType,
+        args: {
+          id: {
+            type: new GraphQLNonNull(GraphQLID)
+          }
+        },
+        resolve: (root, params) => {
+          const expense = ExpenseModel.findById(params.id).exec();
+          if (!expense) {
+            throw new Error("Error");
+          }
+          return expense;
         }
       }
     };

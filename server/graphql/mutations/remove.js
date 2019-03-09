@@ -1,4 +1,4 @@
-const {GraphQLNonNull, GraphQLString} = require('graphql');
+const {GraphQLNonNull, GraphQLID} = require('graphql');
 
 const { expenseType } = require("../types/expense");
 const ExpenseModel = require("../../models/expense");
@@ -7,7 +7,7 @@ exports.remove = {
   type: expenseType,
   args: {
     id: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: new GraphQLNonNull(GraphQLID)
     }
   },
   resolve(root, params) {

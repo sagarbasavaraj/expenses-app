@@ -12,40 +12,13 @@ import { EXPENSES_LIST, REMOVE_EXPENSE } from "./expense.queries";
 
 const Content = styled(Container)`
   padding: 70px 0;
+  z-index: 5;
 `;
-
-const getExpenseId = target => {
-  let node = target;
-
-  while (node.type !== "button") {
-    node = node.parentNode;
-  }
-
-  if (node) {
-    const id = node.getAttribute("data-id");
-    return id;
-  }
-
-  return null;
-};
 
 class AppContent extends Component {
   constructor(props) {
     super(props);
   }
-
-  deleteExpense = ({ target }) => {
-    const id = getExpenseId(target);
-
-    if (id) {
-      this.props.deleteExpense({ variables: { id } });
-    }
-  };
-
-  editExpense = ({ target }) => {
-    const id = getExpenseId(target);
-    console.log(id);
-  };
 
   render() {
     return (
@@ -54,24 +27,19 @@ class AppContent extends Component {
         <Query query={EXPENSES_LIST}>
           {({ data, loading }) => {
             if (loading || !data) {
-              return <div>Loading ...</div>;
+              return <Content>Loading ...</Content>;
             }
             return (
               <Content>
                 <ExpenseList
                   expenses={data.expenses}
-                  deleteExpenseHandler={this.deleteExpense}
-                  editExpenseHandler={this.editExpense}
+                  deleteExpense={this.props.deleteExpense}
                 />
               </Content>
             );
           }}
         </Query>
-        <AppFooter>
-          {(showExpenseForm, closeForm) =>
-            showExpenseForm && <Expense closeForm={closeForm} />
-          }
-        </AppFooter>
+        <AppFooter />
       </React.Fragment>
     );
   }

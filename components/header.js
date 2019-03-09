@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Button, Heading } from "grommet";
-import { Add } from "grommet-icons";
+import { Heading } from "grommet";
 
 import { Row, Column, Container } from "../components/common/layout";
 
@@ -10,6 +9,7 @@ const Header = styled.header`
   background: #4ca387;
   padding: 10px 30px;
   z-index: 3;
+  box-shadow: 0px 10px 7px -7px #777;
 `;
 
 const Content = styled.div`
@@ -38,8 +38,7 @@ const AppHeader = () => (
           </LeftContent>
         </Column>
         <Column xs={9}>
-          <RightContent>
-          </RightContent>
+          <RightContent />
         </Column>
       </Row>
     </Container>

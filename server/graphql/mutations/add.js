@@ -7,19 +7,19 @@ exports.add = {
   type: expenseType,
   args: {
     expenseType: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString)
     },
     amount: {
-      type: new GraphQLNonNull(GraphQLFloat),
-    },
-    paidBy: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    description: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLFloat)
     },
     date: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLFloat)
+    },
+    paidBy: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    description: {
+      type: GraphQLString
     }
   },
   resolve(root, params) {

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { PureComponent, Fragment } from "react";
 import styled from "styled-components";
 import { Text, Button, Box } from "grommet";
 import { Trash, Edit } from "grommet-icons";
 import { map } from "lodash";
 import moment from "moment";
+
+import { getExpenseId } from "./helpers/expense-helpers";
+import withShowExpenseForm from "./with-show-expense-form";
 
 const ExpenseListContainer = styled.section`
   display: grid;
@@ -66,58 +69,84 @@ const ItemFooterButton = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-const ExpenseList = ({
-  expenses,
-  deleteExpenseHandler,
-  editExpenseHandler
-}) => {
-  return (
-    <ExpenseListContainer>
-      {map(expenses, expense => {
-        return (
-          <ExpenseItem key={expense.id}>
-            <Data>
-              <Text size="xlarge" truncate>
-                {expense.expenseType}
-              </Text>
-              <Text size="large">
-                {Number(expense.amount).toLocaleString()}
-              </Text>
-              <Text size="medium" truncate>
-                {expense.description}
-              </Text>
-              <Text size="medium">
-                {moment(+expense.date).format("MMM DD YYYY")}
-              </Text>
-              <Text size="small">{`Paid by: ${expense.paidBy}`}</Text>
-            </Data>
-            <ItemFooterButton>
-              <Box align="start">
-                <Box round="full" overflow="hidden">
-                  <Button
-                    data-id={expense.id}
-                    icon={<Edit color="#097bed" />}
-                    hoverIndicator
-                    onClick={editExpenseHandler}
-                  />
-                </Box>
-              </Box>
-              <Box align="end">
-                <Box round="full" overflow="hidden">
-                  <Button
-                    data-id={expense.id}
-                    icon={<Trash color="#e50615" />}
-                    hoverIndicator
-                    onClick={deleteExpenseHandler}
-                  />
-                </Box>
-              </Box>
-            </ItemFooterButton>
-          </ExpenseItem>
-        );
-      })}
-    </ExpenseListContainer>
-  );
-};
+const EditExpense = withShowExpenseForm(({ children, toggleExpenseForm }) => (
+  <Fragment>{children(toggleExpenseForm)}</Fragment>
+));
+
+class ExpenseList extends PureComponent {
+  state = {
+    expenseId: null
+  };
+  deleteExpenseHandler = ({ target }) => {
+    const id = getExpenseId(target);
+
+    if (id) {
+      this.props.deleteExpense({ variables: { id } });
+    }
+  };
+
+  editExpenseHandler = ({ target }) => {
+    const expenseId = getExpenseId(target);
+    this.setState({ expenseId });
+  };
+
+  render() {
+    const { expenses } = this.props;
+    const { expenseId } = this.state;
+
+    return (
+      <ExpenseListContainer>
+        <EditExpense expenseId={expenseId}>
+          {toggleExpenseForm => {
+            return map(expenses, expense => (
+              <ExpenseItem key={expense.id}>
+                <Data>
+                  <Text size="xlarge" truncate>
+                    {expense.expenseType}
+                  </Text>
+                  <Text size="large">
+                    {Number(expense.amount).toLocaleString()}
+                  </Text>
+                  <Text size="medium" truncate>
+                    {expense.description}
+                  </Text>
+                  <Text size="medium">
+                    {moment(expense.date).format("MMM DD YYYY")}
+                  </Text>
+                  <Text size="small">{`Paid by: ${expense.paidBy}`}</Text>
+                </Data>
+                <ItemFooterButton>
+                  <Box align="start">
+                    <Box round="full" overflow="hidden">
+                      <Button
+                        data-id={expense.id}
+                        icon={<Edit color="#097bed" />}
+                        hoverIndicator
+                        onClick={e => {
+                          this.editExpenseHandler(e);
+                          toggleExpenseForm();
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                  <Box align="end">
+                    <Box round="full" overflow="hidden">
+                      <Button
+                        data-id={expense.id}
+                        icon={<Trash color="#e50615" />}
+                        hoverIndicator
+                        onClick={this.deleteExpenseHandler}
+                      />
+                    </Box>
+                  </Box>
+                </ItemFooterButton>
+              </ExpenseItem>
+            ));
+          }}
+        </EditExpense>
+      </ExpenseListContainer>
+    );
+  }
+}
 
 export default ExpenseList;
