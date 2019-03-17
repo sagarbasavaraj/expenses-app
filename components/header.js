@@ -14,8 +14,7 @@ const Header = styled.header`
 
 const Content = styled.div`
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  align-content: center;
 `;
 
 const LeftContent = styled(Content)`
@@ -30,14 +29,14 @@ const AppHeader = () => (
   <Header>
     <Container>
       <Row>
-        <Column xs={3}>
+        <Column xs={6}>
           <LeftContent>
             <Heading color="#fff" level="3">
-              Expenses
+              My Expenses
             </Heading>
           </LeftContent>
         </Column>
-        <Column xs={9}>
+        <Column xs={6}>
           <RightContent />
         </Column>
       </Row>

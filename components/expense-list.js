@@ -12,7 +12,7 @@ const ExpenseListContainer = styled.section`
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
-  padding: 0 30px;
+  padding: 0 30px 30px 30px;
   grid-gap: 1rem;
 
   @media only screen and (max-width: 600px) {
@@ -29,6 +29,10 @@ const ExpenseListContainer = styled.section`
 
   @media only screen and (min-width: 992px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media only screen and (min-width: 1200) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 `;
 
@@ -51,14 +55,11 @@ const Data = styled.div`
   }
 
   > span:nth-child(3) {
-    grid-column: 1/2;
+    grid-column: 1/3;
+    padding-right: 30px;
   }
 
   > span:nth-child(4) {
-    justify-self: end;
-  }
-
-  > span:nth-child(5) {
     grid-column: 1/3;
     font-style: oblique;
   }
@@ -66,7 +67,12 @@ const Data = styled.div`
 
 const ItemFooterButton = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+
+  > div:nth-child(2) {
+    grid-column: 2/4;
+  }
 `;
 
 const EditExpense = withShowExpenseForm(({ children, toggleExpenseForm }) => (
@@ -101,17 +107,14 @@ class ExpenseList extends PureComponent {
             return map(expenses, expense => (
               <ExpenseItem key={expense.id}>
                 <Data>
-                  <Text size="xlarge" truncate>
+                  <Text size="large" truncate>
                     {expense.expenseType}
                   </Text>
                   <Text size="large">
                     {Number(expense.amount).toLocaleString()}
                   </Text>
-                  <Text size="medium" truncate>
+                  <Text size="small" truncate>
                     {expense.description}
-                  </Text>
-                  <Text size="medium">
-                    {moment(expense.date).format("MMM DD YYYY")}
                   </Text>
                   <Text size="small">{`Paid by: ${expense.paidBy}`}</Text>
                 </Data>
@@ -128,6 +131,11 @@ class ExpenseList extends PureComponent {
                         }}
                       />
                     </Box>
+                  </Box>
+                  <Box align="center">
+                    <Text size="xsmall">
+                      {moment(expense.date).format("MMM DD YYYY HH:mm")}
+                    </Text>
                   </Box>
                   <Box align="end">
                     <Box round="full" overflow="hidden">

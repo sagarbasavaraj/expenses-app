@@ -7,9 +7,9 @@ import withShowExpenseForm from "./with-show-expense-form";
 
 const AppFooter = styled.footer`
   position: fixed;
-  width: 100%;
+  width: auto;
   bottom: 0;
-  z-index: 1;
+  right: 0;
 `;
 
 class Footer extends PureComponent {

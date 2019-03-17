@@ -11,7 +11,7 @@ exports.queryType = new GraphQLObjectType({
       expenses: {
         type: new GraphQLList(expenseType),
         resolve: () => {
-          const expenses = ExpenseModel.find().exec();
+          const expenses = ExpenseModel.find().sort({date: -1, amount: -1}).exec();
           if (!expenses) {
             throw new Error("Error");
           }

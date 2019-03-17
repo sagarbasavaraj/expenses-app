@@ -56,8 +56,8 @@ class ExpenseForm extends PureComponent {
     if (target.name === "amount") {
       value = +value;
     }
-
-    this.setState({ [target.name]: value });
+    console.log(value);
+    this.setState({[target.name]: value });
   };
 
   render() {
@@ -116,7 +116,7 @@ class ExpenseForm extends PureComponent {
             <Box
               as="footer"
               border={{ side: "top" }}
-              pad="small"
+              pad="medium"
               justify="end"
               direction="row"
               align="center"
