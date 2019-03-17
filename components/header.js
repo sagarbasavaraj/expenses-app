@@ -31,7 +31,7 @@ const AppHeader = () => (
         </Heading>
         <RightContainer>
           <Anchor margin="small" color="#fff" href="#" primary label="Sign in" />
-          <Anchor margin="small" color="#fff" href="#" primary label="Sign up" />
+          <Anchor color="#fff" href="#" primary label="Sign up" />
         </RightContainer>
       </Content>
     </Container>
