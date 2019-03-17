@@ -1,45 +1,39 @@
 import styled from "styled-components";
-import { Heading } from "grommet";
+import { Heading, Anchor } from "grommet";
 
 import { Row, Column, Container } from "../components/common/layout";
 
 const Header = styled.header`
   position: fixed;
   width: 100%;
-  background: #4ca387;
+  background: #24292e;
   padding: 10px 30px;
   z-index: 3;
   box-shadow: 0px 10px 7px -7px #777;
 `;
 
 const Content = styled.div`
-  display: flex;
-  align-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
 `;
 
-const LeftContent = styled(Content)`
-  justify-content: flex-start;
-`;
-
-const RightContent = styled(Content)`
-  justify-content: flex-end;
-`;
+const RightContainer = styled.div`
+  justify-self: end;
+`
 
 const AppHeader = () => (
   <Header>
     <Container>
-      <Row>
-        <Column xs={6}>
-          <LeftContent>
-            <Heading color="#fff" level="3">
-              My Expenses
-            </Heading>
-          </LeftContent>
-        </Column>
-        <Column xs={6}>
-          <RightContent />
-        </Column>
-      </Row>
+      <Content>
+        <Heading color="#fff" level="3">
+          My Expenses
+        </Heading>
+        <RightContainer>
+          <Anchor margin="small" color="#fff" href="#" primary label="Sign in" />
+          <Anchor margin="small" color="#fff" href="#" primary label="Sign up" />
+        </RightContainer>
+      </Content>
     </Container>
   </Header>
 );
